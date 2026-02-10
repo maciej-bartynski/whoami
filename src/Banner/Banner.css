@@ -1,0 +1,19 @@
+.banner {
+    width: 100%;
+    display: flex;
+}
+
+.banner_image {
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: inset 10px 10px black;
+}
+
+.banner_content {
+    width: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
