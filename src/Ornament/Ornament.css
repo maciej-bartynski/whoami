@@ -1,0 +1,61 @@
+.ornament {
+    width: 76%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 1px;
+    background-color: var(--jeans);
+    mix-blend-mode: difference;
+}
+
+.ornament.--reverse {
+    justify-content: space-between;
+    width: 56%;
+    background-color: var(--wall);
+    margin-left: auto;
+    margin-top: 10px;
+}
+
+.ornament-line {
+    height: 100px;
+    width: 1px;
+    background-color: var(--jeans);
+}
+
+.ornament-line.--1 {
+    margin-left: 5px;
+    margin-top: 6px;
+    background-color: var(--jeans);
+    height: 20px;
+}
+
+.ornament-line.--2 {
+    margin-left: 8px;
+    margin-top: 2px;
+    background-color: var(--wall);
+    height: 40px;
+}
+
+.ornament-line.--3 {
+    margin-left: 2px;
+    margin-top: 6px;
+    background-color: var(--pastel);
+    height: 18px;
+}
+
+.ornament-line.--4 {
+    margin-left: 1px;
+    margin-top: 2px;
+}
+
+.ornament-line.--5 {
+    margin-left: 15px;
+    margin-top: 16px;
+    height: 58px;
+}
+
+.ornament-line.--6 {
+    margin-left: -5px;
+    margin-top: -6px;
+    height: 8px;
+}

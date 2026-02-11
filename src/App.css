@@ -1,12 +1,7 @@
 #root {
-  --paper: #dadad2;
-  --pastel: #7396bf;
-  --wall: #807b90;
-  --jeans: #332c33;
   width: 100%;
-  max-width: 1600px;
   min-height: 100vh;
-  background-color: var(--paper);
+  background-color: black;
 }
 
 .read-the-docs {

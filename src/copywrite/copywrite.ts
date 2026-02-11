@@ -4,12 +4,8 @@ type TypoItem = {
 }
 
 const Typo: Record<string, TypoItem> = {
-    bannerTitle: {
-        PL: 'programista',
-        ENG: 'programmer',
-    },
     bannerHeadline: {
-        PL: '_hej!<br/>robię<br/>aplikacje.',
+        PL: '_cześć!<br/>robię<br/>aplikacje.',
         ENG: '_hi!<br/>i make<br/>apps.'
     },
     bannerMessage: {
@@ -19,6 +15,14 @@ const Typo: Record<string, TypoItem> = {
     bannerScroll: {
         PL: 'zobacz',
         ENG: 'take a look'
+    },
+    storylineHead: {
+        PL: 'kilka projektów_',
+        ENG: 'some of my projects_'
+    },
+    storylineTools: {
+        PL: 'i stack',
+        ENG: 'and tools'
     }
 }
 
