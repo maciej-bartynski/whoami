@@ -1,0 +1,112 @@
+.ExperienceTile {
+    color: black;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+    transition: transform 50ms linear;
+    min-width: 330px;
+    max-width: 100%;
+    flex: 1;
+}
+
+.ExperienceTile_content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: calc(100% - 80px);
+}
+
+.ExperienceTile_state {
+    font-size: 14px;
+    padding-left: 9px;
+    padding-right: 9px;
+    border: solid 1px var(--wall);
+    border-bottom: none;
+    position: relative;
+}
+
+.ExperienceTile_state::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: var(--wall);
+    right: -4px;
+}
+
+.ExperienceTile_arrows {
+    width: 100%;
+    position: relative;
+    height: 1px;
+    background-color: var(--wall);
+}
+
+.ExperienceTile_arrows.--margin {
+    margin-top: 22px;
+    width: 80px;
+}
+
+.ExperienceTile_project {
+    color: var(--paper);
+    font-size: 18px;
+    padding-left: 9px;
+    padding-right: 9px;
+    background-color: var(--wall);
+    position: relative;
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+.ExperienceTile_project.ongoing::before {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border: solid 1px var(--wall);
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -8.5px;
+    right: -10px;
+}
+
+.ExperienceTile_role {
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.ExperienceTile_label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--jeans);
+    white-space: nowrap;
+}
+
+.ExperienceTile_stack {
+    margin-left: 10px;
+    font-size: 14px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.ExperienceTile_type {
+    font-size: 14px;
+    padding-left: 10px;
+    white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+    .ExperienceTile_ {
+        color: black;
+        position: relative;
+        margin: 10px 10px 0 0;
+        width: 100%;
+    }
+}

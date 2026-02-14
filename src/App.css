@@ -1,9 +1,32 @@
 #root {
   width: 100%;
-  min-height: 100vh;
   background-color: black;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+.lang-button {
+  width: 40px;
+  height: 40px;
+  background-color: var(--jeans);
+  color: var(--paper);
+  border: solid 1px var(--paper);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  gap: 6px;
+  position: fixed;
+  flex-direction: column;
+  bottom: 10px;
+  left: 10px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.lang-button img {
+  width: 12px;
 }

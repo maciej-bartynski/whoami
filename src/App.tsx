@@ -2,10 +2,12 @@ import { useMemo, useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-import Banner from './Banner/Banner'
 import Storyline from './Storyline/Storyline'
 import { AppContext } from './AppContext'
 import Ornament from './Ornament/Ornament'
+import BannerLandscape from './BannerRwd/BannerLandscape'
+import BannerPortrait from './BannerRwd/BannerPortrait';
+import langIcon from "/language-icon.svg";
 
 function App() {
   const [lang, setLang] = useState<'PL' | 'ENG'>('PL');
@@ -19,9 +21,16 @@ function App() {
 
   return (
     <AppContext.Provider value={ctx}>
-      <Banner />
+      <BannerLandscape />
+      <BannerPortrait />
       <Ornament />
       <Storyline />
+      <button
+        onClick={() => setLang(lang === 'PL' ? 'ENG' : 'PL')}
+        className="lang-button"
+      >
+        <img src={langIcon} />{lang === 'PL' ? 'ENG' : 'PL'}
+      </button>
     </AppContext.Provider>
   )
 }

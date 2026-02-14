@@ -81,6 +81,13 @@ export enum DevTools {
 const StorylineTypo = [
     {
         importance: 1,
+        yAxis: {
+            y: 10,
+            label: {
+                PL: 'Jak fajny był zespół',
+                ENG: 'How cool the team was'
+            }
+        },
         project: 'mrWork, react web app',
         role: 'react developer',
         type: 'building, maintenance',
@@ -107,6 +114,13 @@ const StorylineTypo = [
     },
     {
         importance: 1,
+        yAxis: {
+            y: 1,
+            label: {
+                PL: 'Przejrzystość dokumentacji Google',
+                ENG: 'Goole docs clearance'
+            }
+        },
         project: 'mrWork mobile app',
         role: 'flutter developer',
         type: 'building, maintenance',
@@ -126,6 +140,13 @@ const StorylineTypo = [
     },
     {
         importance: 1,
+        yAxis: {
+            y: 3,
+            label: {
+                PL: 'Ile z mojej pracy rozumie mama',
+                ENG: 'How much my mom understands my job'
+            }
+        },
         project: 'TRAINS - game',
         role: 'javascript architect',
         type: 'building',
@@ -146,6 +167,13 @@ const StorylineTypo = [
     },
     {
         importance: 2,
+        yAxis: {
+            y: 5,
+            label: {
+                PL: 'Poziom żartów',
+                ENG: 'Jokes level'
+            }
+        },
         project: 'myBenefit pwa',
         role: 'react developer',
         type: 'building',
@@ -185,6 +213,13 @@ const StorylineTypo = [
     },
     {
         importance: 2,
+        yAxis: {
+            y: 7,
+            label: {
+                PL: 'Pączki dziennie',
+                ENG: 'Donuts per day'
+            }
+        },
         project: 'bakeMAnia pwa',
         role: 'architect, node.js dev, react dev',
         type: 'building, mvp',
@@ -213,6 +248,13 @@ const StorylineTypo = [
     },
     {
         importance: 2,
+        yAxis: {
+            y: 4,
+            label: {
+                PL: '"Więc jesteś informatykiem, tak?"',
+                ENG: '"So... you are good at math, right?"'
+            }
+        },
         project: 'myBenefit, mobile app',
         role: 'react native developer',
         type: 'building, maintenance',
@@ -235,6 +277,13 @@ const StorylineTypo = [
     },
     {
         importance: 2,
+        yAxis: {
+            y: 7,
+            label: {
+                PL: 'Commity na godzinę',
+                ENG: 'Commits per hour'
+            }
+        },
         project: 'mrWork, web widgets',
         role: 'javascript developer',
         type: 'building, maintenance',
@@ -255,6 +304,13 @@ const StorylineTypo = [
     },
     {
         importance: 2,
+        yAxis: {
+            y: 9,
+            label: {
+                PL: 'Satysfakcja z pracy',
+                ENG: 'Proud of work'
+            }
+        },
         project: 'vivko web app 2.0',
         role: 'nextJs developer',
         type: 'building, MVP',
@@ -277,6 +333,13 @@ const StorylineTypo = [
     },
     {
         importance: 2,
+        yAxis: {
+            y: 6,
+            label: {
+                PL: 'Satysfakcja z pracy',
+                ENG: 'Proud of work'
+            }
+        },
         project: 'elmark magento 2.0',
         role: 'front-end developer',
         type: 'building',
@@ -295,6 +358,13 @@ const StorylineTypo = [
     },
     {
         importance: 2,
+        yAxis: {
+            y: 2,
+            label: {
+                PL: 'Poziom mojej piwnicy',
+                ENG: 'My basement level'
+            }
+        },
         project: 'sound intel, react web app',
         role: 'react developer',
         type: 'building, maintenance',
@@ -316,6 +386,13 @@ const StorylineTypo = [
     },
     {
         importance: 3,
+        yAxis: {
+            y: 4,
+            label: {
+                PL: 'Nakład pracy',
+                ENG: 'Effort'
+            }
+        },
         project: 'vivko web app 1.0',
         role: 'react dev, node.js dev, architect',
         type: 'building, mvp',
@@ -341,6 +418,13 @@ const StorylineTypo = [
     },
     {
         importance: 3,
+        yAxis: {
+            y: 3,
+            label: {
+                PL: 'Wzrost w dzieciństwie',
+                ENG: 'Growth in childhood'
+            }
+        },
         project: 'bakeMAnia mobile app',
         role: 'flutter developer',
         type: 'building',
@@ -361,6 +445,13 @@ const StorylineTypo = [
 
     {
         importance: 3,
+        yAxis: {
+            y: 6,
+            label: {
+                PL: 'Wzrost obecnie',
+                ENG: 'Growth now'
+            }
+        },
         project: 'neonet.pl magento 1.0',
         role: 'front-end developer',
         type: 'maintenance',
@@ -380,6 +471,13 @@ const StorylineTypo = [
 
     {
         importance: 3,
+        yAxis: {
+            y: 1,
+            label: {
+                PL: 'Poziom stresu',
+                ENG: 'Stress level'
+            }
+        },
         project: 'neo24 magento 1.0',
         role: 'front-end developer',
         type: 'maintenance',
@@ -399,6 +497,13 @@ const StorylineTypo = [
 
     {
         importance: 4,
+        yAxis: {
+            y: 7,
+            label: {
+                PL: 'O ile lepiej zrobiłby to syn koleżanki mojej mamy',
+                ENG: "How much better my mom's friend's son would have done it."
+            }
+        },
         project: 'sound intel, angular web app',
         role: 'front-end developer',
         type: 'bugfixing, maintenance',
@@ -418,6 +523,13 @@ const StorylineTypo = [
 
     {
         importance: 4,
+        yAxis: {
+            y: 10,
+            label: {
+                PL: 'Wyższość lata nad zimą',
+                ENG: "The superiority of summer over winter"
+            }
+        },
         project: 'set of NPM packges',
         role: 'node.js developer',
         type: 'building',
@@ -441,6 +553,13 @@ const StorylineTypo = [
 
     {
         importance: 4,
+        yAxis: {
+            y: 4,
+            label: {
+                PL: 'Poziom uznania w oczach QA',
+                ENG: "Level of recognition in the eyes of the QA"
+            }
+        },
         project: 'wordpress freelance',
         role: 'wordpress dev',
         type: 'freelance',

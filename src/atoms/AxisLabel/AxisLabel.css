@@ -1,0 +1,4 @@
+.AxisLabel {
+    position: absolute;
+    transition: bottom 150ms linear;
+}

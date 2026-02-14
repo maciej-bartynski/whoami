@@ -17,12 +17,16 @@ const Typo: Record<string, TypoItem> = {
         ENG: 'take a look'
     },
     storylineHead: {
-        PL: 'kilka projektów_',
-        ENG: 'some of my projects_'
+        PL: 'doświadczenie',
+        ENG: 'experience'
     },
     storylineTools: {
-        PL: 'i stack',
-        ENG: 'and tools'
+        PL: 'narzędzia',
+        ENG: 'tools'
+    },
+    storylineJoke: {
+        PL: "Tak naprawdę, to nie jest oś czasu",
+        ENG: 'Oh, this is not "time" axis really'
     }
 }
 

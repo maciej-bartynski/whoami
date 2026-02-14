@@ -1,0 +1,79 @@
+.Axis_section {
+    width: 100%;
+}
+
+.Axis_track {
+    width: 100%;
+    height: 30px;
+    position: relative;
+}
+
+.Axis_handle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: col-resize;
+    background-color: var(--anchor);
+    left: 0;
+    transform: translateX(-50%);
+    user-select: none;
+    font-family: monospace;
+    font-size: 16px;
+    color: var(--paper);
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Axis_handle:hover {
+    background-color: var(--anchor-hover);
+}
+
+.Axis_handle::before {
+    content: attr(data-attr);
+    position: absolute;
+    bottom: 50%;
+    font-size: 12px;
+    right: calc(100% + 10px);
+    white-space: nowrap;
+    color: black;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+}
+
+.Axis_axis {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: black;
+    top: calc(50% - 0.5px);
+    left: 0;
+}
+
+.Axis_axis-unit {
+    position: absolute;
+    background: var(--wall);
+    color: var(--paper);
+    border-radius: 2px;
+    border-top-right-radius: 0;
+    white-space: nowrap;
+    padding: 0px 6px 2px 2px;
+    top: calc(50% - 0px);
+    transform: rotate(-45deg);
+    transform-origin: top right;
+    font-size: 10px;
+}
+
+.Axis_axis-unit::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--wall);
+    border-radius: 50%;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+}

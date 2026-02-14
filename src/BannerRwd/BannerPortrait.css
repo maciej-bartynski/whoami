@@ -1,0 +1,91 @@
+.BannerPortrait {
+    width: 100%;
+    position: relative;
+}
+
+@media (orientation: landscape) {
+    .BannerPortrait {
+        display: none;
+    }
+}
+
+.BannerPortrait_banner {
+    background: var(--paper);
+    /* RWD */
+    width: 100%;
+    min-height: 100vh;
+    max-height: 1080px;
+}
+
+.BannerPortrait_banner img {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 80px);
+    object-fit: cover;
+    object-position: bottom center;
+    background-color: var(--wall);
+
+    /* RWD */
+    max-height: 1000px;
+}
+
+@media (min-width: 835px) {
+    .BannerPortrait_banner img {
+        object-fit: contain;
+    }
+}
+
+/* RWD */
+.BannerPortrait_banner .BannerPortrait_img-square {
+    display: none;
+}
+
+.BannerPortrait_banner-txt-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 80px);
+    max-height: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.BannerPortrait_banner-title {}
+
+.BannerPortrait_banner-title h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 34px;
+    line-height: 1.2;
+    display: inline;
+    background-color: rgba(115, 150, 191, .7);
+}
+
+.BannerPortrait_banner-headline {
+    text-align: center;
+    width: 100%;
+    max-width: 150px;
+    line-height: 1.1;
+}
+
+.BannerPortrait_banner-headline span {
+    background-color: rgba(115, 150, 191, .7);
+    font-size: 14px;
+
+}
+
+.BannerPortrait_banner-contact {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 80px;
+    font-size: 12px;
+    color: #000;
+}
