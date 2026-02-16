@@ -5,14 +5,12 @@ import { useAppContext } from "../../AppContext";
 
 const Axis: FC<{
     onChange: (param: { step: number, positionPx: number }) => void;
-    // steps: number,
     stepConfig: string[]
 }> = ({
     onChange,
     stepConfig
 }) => {
         const steps = stepConfig.length;
-        const trackEndMargin = 15;
         const { lang } = useAppContext();
         const trackRef = useRef<HTMLDivElement | null>(null);
         const handleRef = useRef<HTMLDivElement | null>(null);
@@ -24,8 +22,10 @@ const Axis: FC<{
                 const nodes = track.querySelectorAll('.Axis_axis-unit');
                 const units = [...nodes];
                 units.forEach((element, id) => {
-                    const posRight = (track.offsetWidth) - (((track.offsetWidth + trackEndMargin) / steps) * id);
-                    (element as HTMLDivElement).style.right = `${posRight}px`;
+                    const stepWidthPx = (track.offsetWidth) / steps;
+                    const stepWidthPercent = (stepWidthPx / track.offsetWidth) * 100;
+                    const posRight = (100) - (stepWidthPercent) * id;
+                    (element as HTMLDivElement).style.right = `${posRight}%`;
                 })
 
             }
