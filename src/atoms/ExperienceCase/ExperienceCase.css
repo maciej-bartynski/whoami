@@ -3,23 +3,23 @@
     position: relative;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
     --accent: var(--pastel);
 }
 
 .ExperienceCase_heading {
     order: 2;
-    padding: 0 0 0 25%;
+    width: 75%;
     margin: 0;
     font-size: 20px;
     font-weight: 600;
-    width: 100%;
-    position: relative;
     transition: border-top 250ms ease-out;
 }
 
-.ExperienceCase_heading::after {
+.ExperienceCase::after {
     content: "";
     opacity: 0;
     display: block;
@@ -33,7 +33,7 @@
     transition: left 250ms ease-out, opacity 250ms ease-out;
 }
 
-.ExperienceCase_heading::before {
+.ExperienceCase::before {
     width: 0%;
     height: 1px;
     background-color: var(--accent);
@@ -46,43 +46,40 @@
     opacity: 0;
 }
 
-.ExperienceCase:hover .ExperienceCase_heading::after {
+.ExperienceCase:hover::after {
     opacity: 1;
     left: calc(25% - 3px);
 }
 
-.ExperienceCase:hover .ExperienceCase_heading::before {
+.ExperienceCase:hover::before {
     opacity: 1;
     width: 100%;
 }
 
 .ExperienceCase_heading span:first-child {
-    text-transform: uppercase;
     font-size: 20px;
     letter-spacing: 0.7px;
 }
 
 .ExperienceCase_heading span:last-child {
     font-size: 14px;
-    font-weight: 400;
 }
 
 .ExperienceCase_time {
     order: 1;
     text-align: end;
     font-size: 14px;
-    margin-right: calc(75% + 8px);
     display: inline-block;
-    padding: 0 6px 0px 6px;
-    transition: margin-right 250ms ease-out;
+    padding: 0 20px 0px 6px;
+    transition: background-color 250ms ease-out, padding 250ms ease-out;
     background-color: transparent;
+    color: var(--wall);
 }
 
 .ExperienceCase:hover .ExperienceCase_time {
-    margin-right: calc(75% + 0px);
-    display: inline-block;
     background-color: var(--accent);
     color: var(--paper);
+    padding: 0 6px 0px 6px;
 }
 
 .ExperienceCase_description {
@@ -93,4 +90,5 @@
     font-weight: 400;
     width: 100%;
     line-height: 2;
+    color: var(--wall);
 }

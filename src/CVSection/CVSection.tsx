@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useAppContext } from "../AppContext";
 import "./CVSection.css";
 import Heading from "../atoms/Heading";
 import { normalizeH } from "../atoms/Heading/Heading.tools";
 import ExperienceCase from "../atoms/ExperienceCase";
+import { MyWork, MyWorkItem, ToolSections, ToolsList } from "./myTools";
+import ToolSection from "../atoms/ToolSection/ToolSection";
 
 const Typography = {
     title: {
@@ -33,6 +35,10 @@ const CVSection: FC<{
         const sectionLevel = normalizeH(topH);
         const articlesLevel = normalizeH(sectionLevel + 1);
         const caseLevel = normalizeH(sectionLevel + 1);
+        const toolSectionLevel = normalizeH(articlesLevel + 1);
+
+        const [hoveredCase, setHoveredCase] = useState<null | MyWorkItem>(null);
+        const [hoveredTool, setHoveredTool] = useState<null | ToolsList>(null);
 
         return (
             <section className={ClassNames.CVSection}>
@@ -55,39 +61,33 @@ const CVSection: FC<{
                             {Typography.casesTitle[lang]}
                         </Heading>
 
-                        <ExperienceCase
-                            topH={caseLevel}
-                            title={'Front-end dev with React'}
-                            subtitle={'for MrWork'}
-                            description={"Build a Product for HR multiproducts app, integrate external SaaS'es with HR app"}
-                            timeDate="23.03.2021"
-                            timeDisplay="2021, ongoing"
-                        />
-
-                        <ExperienceCase
-                            topH={caseLevel}
-                            title={'Mobile dev with Flutter'}
-                            subtitle={'for MrWork'}
-                            description={"CI/CD for Flutter App for Google and AppStore, leveling UX by code optimization"}
-                            timeDate="20.06.2024"
-                            timeDisplay="2024, ongoing"
-                        />
-
-                        <ExperienceCase
-                            topH={caseLevel}
-                            title={'Front-end with React'}
-                            subtitle={'for Neonet'}
-                            description={"Adapting Venia storefront POC into real world React PWA on Magento 2 API"}
-                            timeDate="20.06.2024"
-                            timeDisplay="2024, ongoing"
-                        />
+                        {MyWork.map(piece => {
+                            return (
+                                <ExperienceCase
+                                    key={JSON.stringify(piece)}
+                                    topH={caseLevel}
+                                    title={piece.title}
+                                    subtitle={piece.subtitle}
+                                    description={piece.description}
+                                    timeDate={piece.date.time}
+                                    timeDisplay={piece.date.label}
+                                />
+                            )
+                        })}
                     </article>
                     <article className={ClassNames.CVSection_tools}>
                         <Heading h={articlesLevel} className={ClassNames.CVSection_toolsTitle}>
                             {Typography.toolsTitle[lang]}
                         </Heading>
-
-                        <section></section>
+                        <section>
+                            {Object.values(ToolSections).map(sectionName => {
+                                return <ToolSection
+                                    key={sectionName}
+                                    sectionName={sectionName}
+                                    topH={toolSectionLevel}
+                                />
+                            })}
+                        </section>
                     </article>
                 </div>
 

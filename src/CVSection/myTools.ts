@@ -1,5 +1,5 @@
 
-enum ToolSections {
+export enum ToolSections {
     React = 'React',
     Coding = 'Coding',
     Backend = 'Backend',
@@ -9,7 +9,7 @@ enum ToolSections {
     Platforms = 'Platforms',
 }
 
-enum ToolsList {
+export enum ToolsList {
     React = 'React',
     Redux = 'Redux',
     ReactRouter = 'React router',
@@ -43,7 +43,7 @@ enum ToolsList {
     Sentry = 'Sentry',
 }
 
-const MyTools = {
+export const MyTools = {
     [ToolSections.React]: [ToolsList.React, ToolsList.Redux, ToolsList.ReactRouter],
     [ToolSections.Coding]: [ToolsList.TypeScript, ToolsList.JavaScriptES6Plus, ToolsList.HTML5, ToolsList.CSS3, ToolsList.Dart],
     [ToolSections.Backend]: [ToolsList.NodeJs, ToolsList.Express, ToolsList.Mongodb],
@@ -53,9 +53,9 @@ const MyTools = {
     [ToolSections.Platforms]: [ToolsList.Jira, ToolsList.Github, ToolsList.Bitbucket, ToolsList.Auth0, ToolsList.GooglePlay, ToolsList.AppStore, ToolsList.Snyk, ToolsList.Sentry],
 } as const;
 
-const MyWork = [
+export const MyWork = [
     {
-        title: 'Front-end dev with React',
+        title: 'Front-end with React',
         subtitle: 'for MrWork',
         description: "Build a Product for HR multiproducts app, integrate external SaaS'es with HR app",
         date: {
@@ -65,35 +65,106 @@ const MyWork = [
         stack: [
             ToolsList.React,
             ToolsList.Redux,
+            ToolsList.ReactRouter,
+            ToolsList.TypeScript,
+        ]
+    },
+    {
+        title: 'Mobile dev with Flutter',
+        subtitle: 'for MrWork',
+        description: "CI/CD for Google and AppStore, leveling UX by code optimization",
+        date: {
+            time: '20.06.2024',
+            label: '2024, ongoing'
+        },
+        stack: [
+            ToolsList.Dart,
+            ToolsList.Flutter,
+            ToolsList.GooglePlay,
+            ToolsList.AppStore,
+            ToolsList.Auth0
+        ]
+    },
+    {
+        title: 'React developer',
+        subtitle: 'for MyBenefit',
+        description: "Building caffeteria app with large team",
+        date: {
+            time: '20.06.2024',
+            label: '2024, ongoing'
+        },
+        stack: [
+            ToolsList.React,
+            ToolsList.Redux,
+            ToolsList.CSS3,
+            ToolsList.JavaScriptES6Plus
+        ]
+    },
+    {
+        title: 'React Native developer',
+        subtitle: 'for MyBenefit',
+        description: "Integrating React Expo with monorepo, leading team",
+        date: {
+            time: '20.06.2024',
+            label: '2024, ongoing'
+        },
+        stack: [
+            ToolsList.ReactNative,
+            ToolsList.ReactExpo,
+            ToolsList.Docker,
+            ToolsList.JavaScriptES6Plus
+        ]
+    },
+    {
+        title: 'Front-end developer',
+        subtitle: 'for Elmark',
+        description: "Delivering production-ready Magento 2 frontend",
+        date: {
+            time: '20.06.2024',
+            label: '2024, ongoing'
+        },
+        stack: [
+            ToolsList.HTML5,
+            ToolsList.JavaScriptES6Plus,
+            ToolsList.CSS3,
+        ]
+    },
+    {
+        title: 'Front-end with React',
+        subtitle: 'for Neonet',
+        description: "Adapting Venia storefront POC into real world React PWA on Magento 2 API",
+        date: {
+            time: '20.06.2024',
+            label: '2024, ongoing'
+        },
+        stack: [
+            ToolsList.React,
+            ToolsList.Redux,
+            ToolsList.CSS3,
+            ToolsList.JavaScriptES6Plus
+        ]
+    },
+    {
+        title: 'Full stack with Node.js',
+        subtitle: 'for bakeMAnia',
+        description: "Delivering loyalty system",
+        date: {
+            time: '20.06.2024',
+            label: '2024, ongoing'
+        },
+        stack: [
+            ToolsList.React,
+            ToolsList.Redux,
+            ToolsList.ReactRouter,
+            ToolsList.TypeScript,
+            ToolsList.CSS3,
+            ToolsList.Docker,
             ToolsList.NodeJs,
+            ToolsList.Express,
+            ToolsList.JERN
         ]
     }
 ] as const;
 
-export default MyTools
 
-/**topH={caseLevel}
-                            title={'Front-end dev with React'}
-                            subtitle={'for MrWork'}
-                            description={"Build a Product for HR multiproducts app, integrate external SaaS'es with HR app"}
-                            timeDate="23.03.2021"
-                            timeDisplay="2021, ongoing"
-                        />
-
-                        <ExperienceCase
-                            topH={caseLevel}
-                            title={'Mobile dev with Flutter'}
-                            subtitle={'for MrWork'}
-                            description={"CI/CD for Flutter App for Google and AppStore, leveling UX by code optimization"}
-                            timeDate="20.06.2024"
-                            timeDisplay="2024, ongoing"
-                        />
-
-                        <ExperienceCase
-                            topH={caseLevel}
-                            title={'Front-end with React'}
-                            subtitle={'for Neonet'}
-                            description={"Adapting Venia storefront POC into real world React PWA on Magento 2 API"}
-                            timeDate="20.06.2024"
-                            timeDisplay="2024, ongoing"
-                        /> */
+export type MyWorkItem = typeof MyWork[number]

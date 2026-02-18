@@ -1,0 +1,28 @@
+.ToolSection {
+    color: rgba(var(--wall-rgb), .75);
+}
+
+.ToolSection_title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 2px 6px;
+}
+
+.ToolSection_list {
+    display: inline;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.ToolSection_item {
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    padding: 6px;
+    display: inline-block;
+}
