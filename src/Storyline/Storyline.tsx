@@ -1,11 +1,25 @@
 import { FC, useCallback, useMemo, useRef, useState } from "react";
 import "./Storyline.css";
-import StorylineTypo, { DevTools } from "../copywrite/storyline";
+import StorylineTypog, { DevTools, EducationTypo } from "../copywrite/storyline";
 import Typo from "../copywrite/copywrite";
 import { useAppContext } from "../AppContext";
 import Axis from "../atoms/Axis/Axis";
 import AxisLabel from "../atoms/AxisLabel/AxisLabel";
 import ExperienceTile, { ExperienceTileDates, ExperienceTileLabel, ExperienceTileProject } from "../atoms/ExperienceTile/ExperienceTile";
+
+const storylineTrack = [
+    {
+        importance: 0,
+        project: 'whoami?',
+        role: '',
+        type: '',
+        stack: '',
+        state: '',
+        searchBy: [],
+    },
+    ...EducationTypo,
+    ...StorylineTypog,
+];
 
 const Storyline: FC = () => {
     const { lang } = useAppContext();
@@ -22,7 +36,7 @@ const Storyline: FC = () => {
     } = activeStepData;
 
 
-    const printProjects = useCallback((storyline: typeof StorylineTypo) => {
+    const printProjects = useCallback((storyline: typeof storylineTrack) => {
         return <>
             {storyline.map(data => {
                 return <ExperienceTile
@@ -42,12 +56,12 @@ const Storyline: FC = () => {
         restStoryline
     } = useMemo(() => {
 
-        const activeStoryline = printProjects(StorylineTypo.filter(item => {
+        const activeStoryline = printProjects(storylineTrack.filter(item => {
             if (!activeTool) return false;
             return item.searchBy.includes(activeTool);
         }));
 
-        const restStoryline = printProjects(StorylineTypo.filter(item => {
+        const restStoryline = printProjects(storylineTrack.filter(item => {
             if (!activeTool) return true;
             return !item.searchBy.includes(activeTool);
         }));
@@ -59,13 +73,14 @@ const Storyline: FC = () => {
     }, [activeTool, printProjects]);
 
     const tileHeight = 150;
-    const availableSpace = 400;
-    const playMargin = availableSpace - tileHeight;
-    const currentImportance = StorylineTypo[activeStep]?.yAxis?.y ?? 4;
-    const importanceLevelPx = (playMargin / 10);
-    const importanceToPx = (importanceLevelPx * currentImportance) - importanceLevelPx;
-
+    const lastEduBreakpoint = (EducationTypo.length);
+    const totalBreakpoints = (storylineTrack.length - 1);
+    const eduWidthPercent = (100 / totalBreakpoints) * lastEduBreakpoint;
+    const expWidthPercent = 100 - eduWidthPercent;
+    const eduWidthStyle = `calc( (100% - 60px) * ${eduWidthPercent / 100} + 60px)`;
+    const expWidthStyle = `calc(  (100% - 60px) * ${expWidthPercent / 100} + 60px)`;
     const stepContentRef = useRef<HTMLDivElement | null>(null)
+
     return (
         <div className="storyline">
 
@@ -85,120 +100,164 @@ const Storyline: FC = () => {
                             }
                         `}
                     </style>
-                    <div
-                        ref={stepContentRef}
-                        className="storyline_step-content"
-                    // style={{
-                    //     transition: 'padding-bottom 150ms linear',
-                    //     paddingBottom: importanceToPx,
-                    // }}
-                    >
-                        {/* {!!activeStep && (
-                            <div className="storyline_y-axis">
-                                <div className="storyline_y-axis-label">
-                                    {StorylineTypo[activeStep]?.yAxis?.label[lang]}
-                                </div>
+                    <div className="storyline_chart">
+                        <div className="storyline_chart-sections">
+                            <div
+                                className={`storyline_chart-column storyline_chart-edu ${(() => {
+                                    if (activeStep < EducationTypo.length && !!activeStep) {
+                                        return '--active'
+                                    }
+                                    return ''
+                                })()}`}
+                                style={{
+                                    width: eduWidthStyle,
+                                }}
+                                data-attr={(function () {
+                                    if (!activeStep) return ''
+                                    return lang === 'PL'
+                                        ? 'Edukacja'
+                                        : 'Education'
+                                })()}
+                            />
+                            <div
+                                className={`storyline_chart-column storyline_chart-exp ${(() => {
+                                    if (activeStep >= EducationTypo.length) {
+                                        return '--active'
+                                    }
+                                    return ''
+                                })()}`}
+                                style={{
+                                    width: expWidthStyle,
+                                }}
+                                data-attr={(function () {
+                                    if (!activeStep) return ''
+                                    return lang === 'PL'
+                                        ? 'Doświadczenie w programowaniu'
+                                        : 'Experience in programming'
+                                })()}
+                            />
+                        </div>
+                        <div
+                            ref={stepContentRef}
+                            className="storyline_step-content"
+                        >
+                            {!activeStep && (
                                 <div
-                                    className="storyline_y-axis-line"
-                                    style={{ height: importanceToPx + tileHeight }}
-                                />
-                            </div>
-                        )} */}
-
-                        {!!activeStep && (
-                            <>
-                                <div
-                                    className="storyline_y-axis-field"
+                                    className="storyline_step-invite"
                                     style={{
-                                        width: positionPx + 0,
-                                        // height: importanceToPx + tileHeight,
-                                        height: tileHeight
-
+                                        left: positionPx
                                     }}
                                 >
-                                    <div className="storyline_y-axis-field-dot" />
+                                    <span className="storyline_step-invite-headline">
+                                        <span>who am i</span>
+                                        <span>from business perspective</span>
+                                    </span>
+                                    <span
+                                        className="storyline_step-invite-bullet"
+                                    >
+                                        &rsaquo; alomost 10 y. in programming
+                                    </span>
+                                    <span className="storyline_step-invite-bullet">
+                                        &rsaquo; communication sciencie as background
+                                    </span>
+                                    <span className="storyline_step-invite-bullet">
+                                        &rsaquo; ui/ux experience
+                                    </span>
+                                    <span className="storyline_step-invite-claim">
+                                        &rsaquo; always learning, always coding
+                                    </span>
+                                    <span className="storyline_step-invite-message">
+                                        use this handle
+                                    </span>
                                 </div>
+                            )}
+                            {!!activeStep && (
+                                <>
+                                    <div
+                                        className="storyline_y-axis-field"
+                                        style={{
+                                            width: positionPx + 0,
+                                            height: tileHeight
+                                        }}
+                                    >
+                                        <div className="storyline_y-axis-field-dot" />
+                                    </div>
 
-                                <AxisLabel
-                                    row={0}
-                                    // heightPx={importanceToPx + tileHeight}
-                                    heightPx={tileHeight}
-                                    widthPx={positionPx + 0}
-                                    areaRef={stepContentRef}
-                                    heightOffset={30}
-                                >
-                                    <ExperienceTileDates >
-                                        {StorylineTypo[activeStep].state}
-                                    </ExperienceTileDates>
-                                </AxisLabel>
-                                <AxisLabel
-                                    row={1}
-                                    // heightPx={importanceToPx + tileHeight}
-                                    heightPx={tileHeight}
-                                    widthPx={positionPx + 0}
-                                    areaRef={stepContentRef}
-                                    heightOffset={30}
-                                >
-                                    <ExperienceTileProject isOngoing={false}>
-                                        {StorylineTypo[activeStep].project}
-                                    </ExperienceTileProject>
-                                </AxisLabel>
+                                    <AxisLabel
+                                        row={0}
+                                        heightPx={tileHeight}
+                                        widthPx={positionPx + 0}
+                                        areaRef={stepContentRef}
+                                        heightOffset={30}
+                                    >
+                                        <ExperienceTileDates >
+                                            {storylineTrack[activeStep].state}
+                                        </ExperienceTileDates>
+                                    </AxisLabel>
+                                    <AxisLabel
+                                        row={1}
+                                        heightPx={tileHeight}
+                                        widthPx={positionPx + 0}
+                                        areaRef={stepContentRef}
+                                        heightOffset={30}
+                                    >
+                                        <ExperienceTileProject
+                                            isOngoing={false}
+                                            baseColor={((): string => {
+                                                if (activeStep < EducationTypo.length) {
+                                                    return 'rgba(var(--jeans-rgb), .5)';
+                                                }
+                                                return 'var(--pastel)'
+                                            })()}
+                                        >
+                                            {storylineTrack[activeStep].project}
+                                        </ExperienceTileProject>
+                                    </AxisLabel>
 
-                                <AxisLabel
-                                    row={2}
-                                    // heightPx={importanceToPx + tileHeight}
-                                    heightPx={tileHeight}
-                                    widthPx={positionPx + 0}
-                                    areaRef={stepContentRef}
-                                    heightOffset={40}
-                                >
-                                    <ExperienceTileLabel label={lang === 'PL' ? 'rola: ' : 'role: '}>
-                                        {StorylineTypo[activeStep].role}
-                                    </ExperienceTileLabel>
-                                </AxisLabel>
+                                    <AxisLabel
+                                        row={2}
+                                        heightPx={tileHeight}
+                                        widthPx={positionPx + 0}
+                                        areaRef={stepContentRef}
+                                        heightOffset={40}
+                                    >
+                                        <ExperienceTileLabel label={lang === 'PL' ? 'rola: ' : 'role: '}>
+                                            {storylineTrack[activeStep].role}
+                                        </ExperienceTileLabel>
+                                    </AxisLabel>
 
-                                <AxisLabel
-                                    row={3}
-                                    // heightPx={importanceToPx + tileHeight}
-                                    heightPx={tileHeight}
-                                    widthPx={positionPx + 0}
-                                    areaRef={stepContentRef}
-                                    heightOffset={40}
-                                >
-                                    <ExperienceTileLabel label={lang === 'PL' ? 'stack: ' : 'stack: '}>
-                                        {StorylineTypo[activeStep].stack}
-                                    </ExperienceTileLabel>
-                                </AxisLabel>
+                                    <AxisLabel
+                                        row={3}
+                                        heightPx={tileHeight}
+                                        widthPx={positionPx + 0}
+                                        areaRef={stepContentRef}
+                                        heightOffset={40}
+                                    >
+                                        <ExperienceTileLabel label={lang === 'PL' ? 'stack: ' : 'stack: '}>
+                                            {storylineTrack[activeStep].stack}
+                                        </ExperienceTileLabel>
+                                    </AxisLabel>
 
-                                <AxisLabel
-                                    row={4}
-                                    // heightPx={importanceToPx + tileHeight}
-                                    heightPx={tileHeight}
-                                    widthPx={positionPx + 0}
-                                    areaRef={stepContentRef}
-                                    heightOffset={40}
-                                >
-                                    <ExperienceTileLabel label={lang === 'PL' ? 'vibe: ' : 'vibe: '}>
-                                        {StorylineTypo[activeStep].type}
-                                    </ExperienceTileLabel>
-                                </AxisLabel>
-                            </>
-                        )}
-
-                        {!activeStep && (
-                            <div className="storyline_education">
-                                {lang === 'PL'
-                                    ? 'Doświadczenie w programowaniu'
-                                    : 'Experience in programming'}
-                            </div>
-                        )}
+                                    <AxisLabel
+                                        row={4}
+                                        heightPx={tileHeight}
+                                        widthPx={positionPx + 0}
+                                        areaRef={stepContentRef}
+                                        heightOffset={40}
+                                    >
+                                        <ExperienceTileLabel label={lang === 'PL' ? 'vibe: ' : 'vibe: '}>
+                                            {storylineTrack[activeStep].type}
+                                        </ExperienceTileLabel>
+                                    </AxisLabel>
+                                </>
+                            )}
+                        </div>
                     </div>
                     <div className="storyline_axis-wrapper">
                         <div className="storyline_axis-wrapper_before" />
                         <Axis
-                            // steps={StorylineTypo.length - 1}
                             onChange={setActiveStep}
-                            stepConfig={StorylineTypo.map(item => item.project)}
+                            stepConfig={storylineTrack.map(item => item.project)}
                         />
                         <div className="storyline_axis-wrapper_after" />
                     </div>
@@ -248,7 +307,7 @@ const Storyline: FC = () => {
                     )
                 })}
             </div>
-        </div>
+        </div >
     )
 }
 

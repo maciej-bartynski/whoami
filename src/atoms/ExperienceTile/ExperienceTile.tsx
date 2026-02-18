@@ -3,11 +3,17 @@ import './ExperienceTile.css';
 import { useAppContext } from "../../AppContext";
 
 export const ExperienceTileProject: FC<PropsWithChildren<{
-    isOngoing: boolean
-}>> = ({ children, isOngoing }) => {
+    isOngoing: boolean,
+    baseColor?: string;
+}>> = ({ children, isOngoing, baseColor = 'var(--wall)' }) => {
     const { lang } = useAppContext();
     return (
-        <div className={`ExperienceTile_project ${isOngoing ? 'ongoing' : ''}`}>
+        <div
+            className={`ExperienceTile_project ${isOngoing ? 'ongoing' : ''}`}
+            style={{
+                backgroundColor: baseColor
+            }}
+        >
             <span className="ExperienceTile_label">{lang === 'PL' ? 'projekt: ' : 'project: '}</span>
             {children}
         </div>

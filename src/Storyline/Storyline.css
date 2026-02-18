@@ -133,21 +133,89 @@
     }
 }
 
-
-
-
-/** asix */
 .storyline_axis-section {
     width: 100%;
-    padding: 50px;
+    padding: 0 50px;
+    margin-bottom: 200px;
+}
+
+.storyline_chart {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.storyline_chart-column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.storyline_chart-column::before {
+    content: "";
+    position: absolute;
+    height: 0%;
+    bottom: 0%;
+    left: 0;
+    right: 0;
+    background: radial-gradient(ellipse 100% 50% at left bottom,
+            rgba(var(--pastel-rgb), .3),
+            rgba(var(--paper-rgb), 1))
+}
+
+@keyframes pulse {
+    from {
+        height: 0%;
+    }
+
+    to {
+        height: 100%
+    }
+}
+
+.storyline_chart-column.--active::before {
+    animation: pulse 250ms linear forwards;
+}
+
+.storyline_chart-column::after {
+    content: attr(data-attr);
+    font-size: 12px;
+    color: var(--pastel);
+    font-weight: 500;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.storyline_chart-edu::before {
+    background: radial-gradient(ellipse 100% 50% at right bottom,
+            rgba(var(--jeans-rgb), .3),
+            rgba(var(--paper-rgb), 1))
+}
+
+.storyline_chart-edu::after {
+    color: var(--jeans);
+}
+
+.storyline_chart-exp {
+    align-items: flex-start;
+    padding-left: 10px;
+}
+
+.storyline_chart-sections {
+    height: 250px;
+    display: flex;
+    width: 100%;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
 }
 
 .storyline_step-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    min-height: 400px;
+    height: 250px;
     position: relative;
     width: calc(100% - 120px);
     margin-left: 60px;
@@ -160,7 +228,7 @@
 
 .storyline_axis-wrapper_before {
     width: 60px;
-    height: 60px;
+    height: 10px;
     position: relative;
     display: flex;
     align-items: center;
@@ -188,8 +256,8 @@
 .storyline_axis-wrapper_after::before {
     content: "";
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 10px;
+    height: 10px;
     transform: rotate(45deg);
     border-top: solid 1px black;
     border-right: solid 1px black;
@@ -271,17 +339,78 @@
     transform-origin: right bottom;
 }
 
-.storyline_education {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.storyline_step-invite {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
+    align-items: flex-start;
+    height: 100%;
+}
+
+.storyline_step-invite::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--floor);
+    height: calc(100% - 59px);
+    width: 1px;
+    display: block;
+}
+
+.storyline_step-invite::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -4.5px;
+    height: 8px;
+    width: 8px;
+    display: block;
+    transform: rotate(45deg);
+    border: solid 1px var(--floor);
+    border-top-color: transparent;
+    border-left-color: transparent;
+}
+
+.storyline_step-invite-headline {}
+
+.storyline_step-invite-headline span:first-of-type {
+    color: var(--floor);
+    font-size: 60px;
+    font-weight: 900;
+    height: 59px;
+    display: block;
+}
+
+.storyline_step-invite-headline span:last-of-type {
+    border-top: solid 1px var(--floor);
+    color: var(--floor);
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.storyline_step-invite-bullet {
+    text-align: start;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--floor);
+    padding: 4px;
+}
+
+.storyline_step-invite-claim {
+    text-align: start;
+    font-size: 12px;
     font-weight: 500;
-    color: rgb(88, 88, 88);
+    padding: 4px;
+    color: var(--paper);
+    background-color: var(--floor);
+}
+
+.storyline_step-invite-message {
+    text-align: start;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--floor);
+    margin-top: auto;
+    padding: 10px;
 }

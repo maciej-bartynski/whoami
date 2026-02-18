@@ -8,6 +8,7 @@ import Ornament from './Ornament/Ornament'
 import BannerLandscape from './BannerRwd/BannerLandscape'
 import BannerPortrait from './BannerRwd/BannerPortrait';
 import langIcon from "/language-icon.svg";
+import CVSection from "./CVSection";
 
 function App() {
   const [lang, setLang] = useState<'PL' | 'ENG'>('PL');
@@ -24,6 +25,18 @@ function App() {
       <BannerLandscape />
       <BannerPortrait />
       <Ornament />
+      <CVSection />
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+
       <Storyline />
       <button
         onClick={() => setLang(lang === 'PL' ? 'ENG' : 'PL')}

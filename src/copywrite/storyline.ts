@@ -576,4 +576,86 @@ const StorylineTypo = [
 
 ]
 
+export const EducationTypo = [
+    {
+        importance: 1,
+        yAxis: {
+            y: 0,
+            label: {
+                PL: '',
+                ENG: ''
+            }
+        },
+        project: 'journalism & social communication',
+        role: "bachelor's",
+        type: 'brands communication & social research',
+        stack: 'student',
+        state: 'thesis 2014',
+        searchBy: []
+    },
+    {
+        importance: 1,
+        yAxis: {
+            y: 0,
+            label: {
+                PL: '',
+                ENG: ''
+            }
+        },
+        project: 'communication design',
+        role: "master's",
+        type: 'ux&ui, brand communication, brand design',
+        stack: 'student',
+        state: 'thesis 2016',
+        searchBy: []
+    },
+    {
+        importance: 2,
+        yAxis: {
+            y: 0,
+            label: {
+                PL: '',
+                ENG: ''
+            }
+        },
+        project: 'law',
+        role: "listener to 1st year",
+        type: 'introduction to law in general',
+        stack: 'student - listener',
+        state: '2009',
+        searchBy: []
+    },
+    {
+        importance: 2,
+        yAxis: {
+            y: 0,
+            label: {
+                PL: '',
+                ENG: ''
+            }
+        },
+        project: 'ux design',
+        role: "attendant",
+        type: 'practic workshop',
+        stack: 'student - listener',
+        state: '2017',
+        searchBy: []
+    },
+    {
+        importance: 2,
+        yAxis: {
+            y: 0,
+            label: {
+                PL: '',
+                ENG: ''
+            }
+        },
+        project: 'frontent & react & oo programming',
+        role: "participant",
+        type: 'labs, theory & practice',
+        stack: 'student - listener',
+        state: '2017',
+        searchBy: []
+    },
+]
 export default StorylineTypo;

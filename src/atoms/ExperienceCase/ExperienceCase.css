@@ -1,0 +1,96 @@
+.ExperienceCase {
+    color: var(--floor);
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    --accent: var(--pastel);
+}
+
+.ExperienceCase_heading {
+    order: 2;
+    padding: 0 0 0 25%;
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    position: relative;
+    transition: border-top 250ms ease-out;
+}
+
+.ExperienceCase_heading::after {
+    content: "";
+    opacity: 0;
+    display: block;
+    position: absolute;
+    background-color: var(--accent);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    top: -3px;
+    left: 0;
+    transition: left 250ms ease-out, opacity 250ms ease-out;
+}
+
+.ExperienceCase_heading::before {
+    width: 0%;
+    height: 1px;
+    background-color: var(--accent);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 500ms ease-out, opacity 500ms ease-out;
+    display: block;
+    content: "";
+    opacity: 0;
+}
+
+.ExperienceCase:hover .ExperienceCase_heading::after {
+    opacity: 1;
+    left: calc(25% - 3px);
+}
+
+.ExperienceCase:hover .ExperienceCase_heading::before {
+    opacity: 1;
+    width: 100%;
+}
+
+.ExperienceCase_heading span:first-child {
+    text-transform: uppercase;
+    font-size: 20px;
+    letter-spacing: 0.7px;
+}
+
+.ExperienceCase_heading span:last-child {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.ExperienceCase_time {
+    order: 1;
+    text-align: end;
+    font-size: 14px;
+    margin-right: calc(75% + 8px);
+    display: inline-block;
+    padding: 0 6px 0px 6px;
+    transition: margin-right 250ms ease-out;
+    background-color: transparent;
+}
+
+.ExperienceCase:hover .ExperienceCase_time {
+    margin-right: calc(75% + 0px);
+    display: inline-block;
+    background-color: var(--accent);
+    color: var(--paper);
+}
+
+.ExperienceCase_description {
+    order: 3;
+    padding: 0 0 0 25%;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    width: 100%;
+    line-height: 2;
+}
