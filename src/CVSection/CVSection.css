@@ -61,6 +61,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .CVSection_toolsTitle {
@@ -71,4 +72,23 @@
     text-align: end;
     width: 100%;
     padding-right: 75%;
+}
+
+.CVSection_toolBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.CVSection_aside {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }

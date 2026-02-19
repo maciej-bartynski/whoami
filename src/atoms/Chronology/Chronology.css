@@ -1,0 +1,96 @@
+.Chronology_section {
+    width: calc(100% - 120px);
+    z-index: 1;
+}
+
+.Chronology_track {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Chronology_handle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: col-resize;
+    background-color: var(--anchor);
+    user-select: none;
+    font-family: monospace;
+    font-size: 16px;
+    color: var(--paper);
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: -15px
+}
+
+.Chronology_handle:hover {
+    background-color: var(--anchor-hover);
+}
+
+.Chronology_axis {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: black;
+    top: calc(50% - 0.5px);
+    left: 0;
+}
+
+.Chronology_axis-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.Chronology_axis-unit {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--wall);
+    border-radius: 50%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@keyframes Chronology-pulse {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+.Chronology_axis-unit::after {
+    content: attr(data-attr);
+    position: absolute;
+    color: var(--paper);
+    background-color: var(--pastel);
+    border-radius: 2px;
+    border-top-right-radius: 0;
+    white-space: nowrap;
+    padding: 0px 6px 2px 2px;
+    top: 100%;
+    right: 50%;
+    transform: rotate(-45deg);
+    transform-origin: top right;
+    font-size: 10px;
+    opacity: 0;
+}
+
+.Chronology_axis-unit.--active::after {
+    animation: Chronology-pulse 250ms linear forwards;
+}

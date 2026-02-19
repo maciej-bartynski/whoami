@@ -1,11 +1,13 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import { useAppContext } from "../AppContext";
 import "./CVSection.css";
 import Heading from "../atoms/Heading";
 import { normalizeH } from "../atoms/Heading/Heading.tools";
 import ExperienceCase from "../atoms/ExperienceCase";
-import { MyWork, MyWorkItem, ToolSections, ToolsList } from "./myTools";
+import { MyWork, MyWorkItem, MyWorkSecondary, MyWorkTertiary, ToolSections, ToolsList } from "./myTools";
 import ToolSection from "../atoms/ToolSection/ToolSection";
+import HoveringDiv from "../atoms/HoveringDiv/HoveringDiv";
+import Chronology from "../atoms/Chronology/Chronology";
 
 const Typography = {
     title: {
@@ -32,6 +34,15 @@ const CVSection: FC<{
     topH = 2,
 }) => {
         const { lang } = useAppContext();
+        const [activeStep, setActiveStep] = useState(0);
+
+        const [isChronologyTouched, setIsChronologyTouched] = useState(false);
+
+        const onStepChange = useCallback((params: { step: number, touched: boolean }) => {
+            setActiveStep(params.step);
+            setIsChronologyTouched(params.touched);
+        }, []);
+
         const sectionLevel = normalizeH(topH);
         const articlesLevel = normalizeH(sectionLevel + 1);
         const caseLevel = normalizeH(sectionLevel + 1);
@@ -39,6 +50,22 @@ const CVSection: FC<{
 
         const [hoveredCase, setHoveredCase] = useState<null | MyWorkItem>(null);
         const [hoveredTool, setHoveredTool] = useState<null | ToolsList>(null);
+
+        const { activeTools, activeCases } = useMemo(() => {
+
+            const tools = hoveredCase?.stack ?? [];
+
+            const cases = tools.map(tool => {
+                const workCase = [...MyWork].find(item => [...item.stack].includes(tool));
+                return workCase;
+            }).filter(i => !!i);
+
+            return {
+                activeTools: hoveredCase ? (hoveredCase?.stack ?? []) : null,
+                activeCases: hoveredTool ? cases : null,
+            }
+
+        }, [hoveredCase, hoveredTool]);
 
         return (
             <section className={ClassNames.CVSection}>
@@ -63,15 +90,21 @@ const CVSection: FC<{
 
                         {MyWork.map(piece => {
                             return (
-                                <ExperienceCase
+                                <HoveringDiv
                                     key={JSON.stringify(piece)}
-                                    topH={caseLevel}
-                                    title={piece.title}
-                                    subtitle={piece.subtitle}
-                                    description={piece.description}
-                                    timeDate={piece.date.time}
-                                    timeDisplay={piece.date.label}
-                                />
+                                    onHover={() => setHoveredCase(piece)}
+                                    onHoverEnd={() => setHoveredCase(null)}
+                                    style={{ width: '100%' }}
+                                >
+                                    <ExperienceCase
+                                        topH={caseLevel}
+                                        title={piece.title}
+                                        subtitle={piece.subtitle}
+                                        description={piece.description}
+                                        timeDate={piece.date.time}
+                                        timeDisplay={piece.date.label}
+                                    />
+                                </HoveringDiv>
                             )
                         })}
                     </article>
@@ -79,18 +112,27 @@ const CVSection: FC<{
                         <Heading h={articlesLevel} className={ClassNames.CVSection_toolsTitle}>
                             {Typography.toolsTitle[lang]}
                         </Heading>
-                        <section>
+                        <section className={ClassNames.CVSection_toolBlock}>
                             {Object.values(ToolSections).map(sectionName => {
                                 return <ToolSection
                                     key={sectionName}
                                     sectionName={sectionName}
                                     topH={toolSectionLevel}
+                                    activeTools={activeTools ? [...activeTools] : null}
                                 />
                             })}
                         </section>
                     </article>
                 </div>
 
+
+                <aside className={ClassNames.CVSection_aside}>
+                    <Chronology
+                        step={activeStep}
+                        onChange={onStepChange}
+                        stepConfig={AxisSteps}
+                    />
+                </aside>
             </section>
         )
     }
@@ -106,5 +148,43 @@ enum ClassNames {
     CVSection_cases = 'CVSection_cases',
     CVSection_tools = 'CVSection_tools',
     CVSection_casesTitle = 'CVSection_casesTitle',
-    CVSection_toolsTitle = 'CVSection_toolsTitle'
+    CVSection_toolsTitle = 'CVSection_toolsTitle',
+    CVSection_toolBlock = 'CVSection_toolBlock',
+    CVSection_aside = 'CVSection_aside'
 }
+
+const AxisSteps = [
+    ...MyWork.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: 'var(--pastel)',
+            label: item.title,
+            sortKey: item.date.time
+        }
+    }),
+    ...MyWorkSecondary.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: 'var(--pastel)',
+            label: item.title,
+            sortKey: item.date.time
+        }
+    }),
+    ...MyWorkTertiary.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: 'var(--pastel)',
+            label: item.title,
+            sortKey: item.date.time
+        }
+    })
+]
+
+AxisSteps.sort((a, b) => {
+    const dateA = new Date(a.sortKey).getTime();
+    const dateB = new Date(b.sortKey).getTime();
+    return dateA - dateB;
+});
+
+console.log("a", AxisSteps)
+

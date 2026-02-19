@@ -1,14 +1,29 @@
-import { FC, PropsWithChildren } from "react";
+import { forwardRef } from "react";
+import type { ComponentPropsWithRef } from "react";
 
-const HoveringDiv: FC<PropsWithChildren<{
-    onHover: () => void,
-    onHoverEnd: () => void
-}>> = ({ children, onHover, onHoverEnd }) => {
+export type HoveringDivProps = {
+    onHover: () => void;
+    onHoverEnd: () => void;
+} & Omit<ComponentPropsWithRef<"div">, "onMouseEnter" | "onMouseLeave">;
+
+const HoveringDiv = forwardRef<HTMLDivElement, HoveringDivProps>(({
+    onHover,
+    onHoverEnd,
+    children,
+    ...attr
+}, ref) => {
     return (
-        <div>
+        <div
+            {...attr}
+            ref={ref}
+            onMouseEnter={onHover}
+            onMouseLeave={onHoverEnd}
+        >
             {children}
         </div>
-    )
-}
+    );
+});
 
-export default HoveringDiv
+HoveringDiv.displayName = "HoveringDiv";
+
+export default HoveringDiv;

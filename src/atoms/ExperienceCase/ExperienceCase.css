@@ -14,9 +14,6 @@
     order: 2;
     width: 75%;
     margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-    transition: border-top 250ms ease-out;
 }
 
 .ExperienceCase::after {
@@ -39,7 +36,7 @@
     background-color: var(--accent);
     position: absolute;
     top: 0;
-    left: 0;
+    left: 15%;
     transition: width 500ms ease-out, opacity 500ms ease-out;
     display: block;
     content: "";
@@ -53,22 +50,23 @@
 
 .ExperienceCase:hover::before {
     opacity: 1;
-    width: 100%;
+    width: 40%;
 }
 
 .ExperienceCase_heading span:first-child {
-    font-size: 20px;
+    font-size: 14px;
     letter-spacing: 0.7px;
 }
 
 .ExperienceCase_heading span:last-child {
     font-size: 14px;
+    font-weight: 500;
 }
 
 .ExperienceCase_time {
     order: 1;
     text-align: end;
-    font-size: 14px;
+    font-size: 12px;
     display: inline-block;
     padding: 0 20px 0px 6px;
     transition: background-color 250ms ease-out, padding 250ms ease-out;
@@ -86,7 +84,7 @@
     order: 3;
     padding: 0 0 0 25%;
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     width: 100%;
     line-height: 2;
