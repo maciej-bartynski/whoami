@@ -30,6 +30,7 @@ const ToolSection: FC<{
                     data-is-tool={isNameATool}
                     className={ClassNames.ToolSection_title}
                     data-active={`${isNameActive ? "true" : "false"}`}
+                    data-anchor={sectionName}
                 >
                     {sectionName}
                 </Heading>
@@ -43,6 +44,7 @@ const ToolSection: FC<{
                                 data-is-tool={true}
                                 className={ClassNames.ToolSection_item}
                                 data-active={`${(activeTools as string[])?.includes(tool) ? "true" : "false"}`}
+                                data-anchor={tool}
                             >
                                 {tool}
                             </li>

@@ -59,7 +59,7 @@ export const MyWork = [
         subtitle: 'for MrWork',
         description: "Build a Product for HR multiproducts app, integrate external SaaS'es with HR app",
         date: {
-            time: '01.06.2021',
+            time: '2021-06-01',
             label: '2021, ongoing'
         },
         stack: [
@@ -78,7 +78,7 @@ export const MyWork = [
         subtitle: 'for MrWork',
         description: "CI/CD for Google and AppStore, leveling UX by code optimization",
         date: {
-            time: '20.06.2024',
+            time: '2024-06-20',
             label: '2024-2025'
         },
         stack: [
@@ -96,7 +96,7 @@ export const MyWork = [
         subtitle: 'for MyBenefit',
         description: "Building caffeteria app with large team",
         date: {
-            time: '01.08.2020',
+            time: '2020-08-01',
             label: '2020-2021'
         },
         stack: [
@@ -112,7 +112,7 @@ export const MyWork = [
         subtitle: 'for Neonet',
         description: "Adapting Venia storefront POC into real world React PWA on Magento 2 API",
         date: {
-            time: '01.12.2018',
+            time: '2018-12-01',
             label: '2018-2020'
         },
         stack: [
@@ -131,7 +131,7 @@ export const MyWorkSecondary = [
         subtitle: 'for bakeMAnia',
         description: "Delivering loyalty system for bakery",
         date: {
-            time: '10.06.2025',
+            time: '2025-06-10',
             label: '2025, ongoing'
         },
         stack: [
@@ -154,7 +154,7 @@ export const MyWorkSecondary = [
         subtitle: 'for MyBenefit',
         description: "Integrating React Expo with monorepo, leading team",
         date: {
-            time: '01.09.2020',
+            time: '2020-09-01',
             label: '2020-2021'
         },
         stack: [
@@ -170,7 +170,7 @@ export const MyWorkSecondary = [
         subtitle: 'for Elmark',
         description: "Delivering frontend for Magento 2 e-commerce",
         date: {
-            time: '01.06.2020',
+            time: '2020-06-01',
             label: '2020'
         },
         stack: [
@@ -184,7 +184,7 @@ export const MyWorkSecondary = [
         subtitle: 'for 25watt',
         description: "Delivering staging-ready product for handing over",
         date: {
-            time: '01.09.2018',
+            time: '2018-09-01',
             label: '2018'
         },
         stack: [
@@ -198,7 +198,7 @@ export const MyWorkSecondary = [
         subtitle: 'for open usage',
         description: "The most powerfull frontend stack for browser game",
         date: {
-            time: '01.11.2025',
+            time: '2025-11-01',
             label: '2025, ongoing'
         },
         stack: [
@@ -218,7 +218,7 @@ export const MyWorkTertiary = [
         subtitle: 'for bakeMAnia',
         description: "Rapid MVP - backendless loyalty system for bakery business",
         date: {
-            time: '01.06.2025',
+            time: '2025-06-01',
             label: '2025'
         },
         stack: [
@@ -233,7 +233,7 @@ export const MyWorkTertiary = [
         subtitle: 'for self-use',
         description: "App for household budget & taxes",
         date: {
-            time: '20.06.2024',
+            time: '2024-06-20',
             label: '2024, ongoing'
         },
         stack: [
@@ -253,7 +253,7 @@ export const MyWorkTertiary = [
         subtitle: 'for self-use',
         description: "App for household budget & taxes",
         date: {
-            time: '10.06.2023',
+            time: '2023-06-10',
             label: '2023-2024'
         },
         stack: [
@@ -276,7 +276,7 @@ export const MyEdu = [
         subtitle: 'at Communication Design',
         description: "University of Wroclaw. Brand design, communication science, ux/ui, and more",
         date: {
-            time: '01.06.2016',
+            time: '2016-06-01',
             label: '2016'
         },
         stack: []
@@ -286,7 +286,7 @@ export const MyEdu = [
         subtitle: 'at Journalism and Social Communication',
         description: "University of Wroclaw. Strong writing/communicating skills",
         date: {
-            time: '01.06.2014',
+            time: '2014-06-01',
             label: '2014'
         },
         stack: []

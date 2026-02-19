@@ -69,9 +69,13 @@
 }
 
 .CVSection_casesTitle {
-    text-align: end;
-    width: 100%;
-    padding-right: 75%;
+    text-align: start;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    margin-left: 25%;
+    color: var(--pastel);
+    width: 75%;
 }
 
 .CVSection_toolBlock {

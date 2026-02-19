@@ -4,10 +4,11 @@ import "./CVSection.css";
 import Heading from "../atoms/Heading";
 import { normalizeH } from "../atoms/Heading/Heading.tools";
 import ExperienceCase from "../atoms/ExperienceCase";
-import { MyWork, MyWorkItem, MyWorkSecondary, MyWorkTertiary, ToolSections, ToolsList } from "./myTools";
+import { MyEdu, MyWork, MyWorkItem, MyWorkSecondary, MyWorkTertiary, ToolSections, ToolsList } from "./myTools";
 import ToolSection from "../atoms/ToolSection/ToolSection";
 import HoveringDiv from "../atoms/HoveringDiv/HoveringDiv";
 import Chronology from "../atoms/Chronology/Chronology";
+import DynamicDiagonal from "../atoms/DynamicDiagonal/DynamicDiagonal";
 
 const Typography = {
     title: {
@@ -87,7 +88,6 @@ const CVSection: FC<{
                         <Heading h={articlesLevel} className={ClassNames.CVSection_casesTitle}>
                             {Typography.casesTitle[lang]}
                         </Heading>
-
                         {MyWork.map(piece => {
                             return (
                                 <HoveringDiv
@@ -95,6 +95,7 @@ const CVSection: FC<{
                                     onHover={() => setHoveredCase(piece)}
                                     onHoverEnd={() => setHoveredCase(null)}
                                     style={{ width: '100%' }}
+                                    data-anchor={JSON.stringify(piece)}
                                 >
                                     <ExperienceCase
                                         topH={caseLevel}
@@ -125,7 +126,6 @@ const CVSection: FC<{
                     </article>
                 </div>
 
-
                 <aside className={ClassNames.CVSection_aside}>
                     <Chronology
                         step={activeStep}
@@ -133,6 +133,13 @@ const CVSection: FC<{
                         stepConfig={AxisSteps}
                     />
                 </aside>
+
+                {activeTools?.length && hoveredCase && (
+                    <DynamicDiagonal
+                        leftAnchor={JSON.stringify(hoveredCase)}
+                        rightAnchors={[...activeTools]}
+                    />
+                )}
             </section>
         )
     }
@@ -177,14 +184,19 @@ const AxisSteps = [
             label: item.title,
             sortKey: item.date.time
         }
-    })
-]
-
-AxisSteps.sort((a, b) => {
+    }),
+    ...MyEdu.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: 'var(--pastel)',
+            label: item.title,
+            sortKey: item.date.time
+        }
+    }),
+].sort((a, b) => {
     const dateA = new Date(a.sortKey).getTime();
     const dateB = new Date(b.sortKey).getTime();
     return dateA - dateB;
 });
 
-console.log("a", AxisSteps)
 
