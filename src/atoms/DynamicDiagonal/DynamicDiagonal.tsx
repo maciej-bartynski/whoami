@@ -13,60 +13,91 @@ const DynamicDiagonal: FC<{
         const [elements, setElements] = useState<(JSX.Element)[]>([]);
 
         useEffect(() => {
+            const updateLines = () => {
+                const spans = rightAnchors.map((anchor) => {
+                    const startElement = document.querySelector(`[data-anchor="${leftAnchor}"]`) as HTMLDivElement;
+                    const endElement = document.querySelector(`[data-anchor="${anchor}"]`) as HTMLDivElement;
+                    if (startElement && endElement) {
+                        const startY = startElement.getBoundingClientRect().top + window.scrollY;
+                        const startX = startElement.getBoundingClientRect().right + window.scrollX;
 
-            const spans = rightAnchors.map((anchor) => {
-                const startElement = document.querySelector(`[data-anchor="${leftAnchor}"]`) as HTMLDivElement;
-                const endElement = document.querySelector(`[data-anchor="${anchor}"]`) as HTMLDivElement;
-                if (startElement && endElement) {
+                        const endY = endElement.getBoundingClientRect().bottom - (endElement.getBoundingClientRect().height / 2) + window.scrollY;
+                        const endX = endElement.getBoundingClientRect().left + window.scrollX;
 
-                    const startY = startElement.getBoundingClientRect().top + window.scrollY;
-                    const staryX = startElement.getBoundingClientRect().right + window.scrollX;
+                        const calculateLineLengthAndRotation = (): {
+                            lengthPx: number,
+                            rotationDeg: number,
+                        } => {
+                            const deltaX = endX - startX;
+                            const deltaY = endY - startY;
 
-                    const endY = endElement.getBoundingClientRect().bottom + window.scrollY;
-                    const endX = endElement.getBoundingClientRect().left + window.scrollX;
+                            const lengthPx = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                            const rotationDeg = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
 
-                    const calculateLineLengthAndRotation = (): {
-                        lengthPx: number,
-                        rotationPx: number,
-                    } => {
-
-                        /** calculations */
-
-                        return {
-                            lengthPx: NaN,
-                            rotationPx: NaN
+                            return {
+                                lengthPx,
+                                rotationDeg
+                            };
                         }
-                    }
 
-                    const lineWidth = calculateLineLengthAndRotation().lengthPx;
-                    const lineRotation = calculateLineLengthAndRotation().rotationPx;
+                        const { lengthPx: lineWidth, rotationDeg: lineRotation } = calculateLineLengthAndRotation();
 
-                    const line = <span
-                        ref={(node) => {
-                            setTimeout(() => {
-                                if (node) {
-                                    node.style.width = `${lineWidth}px`;
+                        const line = <span
+                            key={leftAnchor + anchor}
+                            ref={(node) => {
+
+                                const updateThisOne = () => {
+                                    requestAnimationFrame(() => {
+                                        if (node) node.style.width = `${lineWidth}px`;
+                                    });
                                 }
-                            }, 100 / 6);
-                        }}
-                        style={{
-                            display: 'inline-block',
-                            height: 1,
-                            background: 'black',
-                            transition: 'width 250ms ease-in-out',
-                            position: 'absolute',
-                            top: startY,
-                            left: staryX,
-                            width: 0,
-                            transform: `rotate(${lineRotation}deg)`,
-                        }}
-                    />;
 
-                    return line
-                }
-            }).filter(i => !!i);
+                                if (node) {
+                                    updateThisOne();
+                                    window.addEventListener('scroll', updateThisOne);
+                                    window.addEventListener('resize', updateThisOne);
+                                } else {
+                                    window.removeEventListener('scroll', updateThisOne);
+                                    window.removeEventListener('resize', updateThisOne);
+                                }
+                            }}
+                            style={{
+                                display: 'inline-block',
+                                height: '1px',
+                                background: 'var(--section-accent, var(--pastel))',
+                                transition: 'width 500ms ease-out',
+                                transitionDelay: '600ms',
+                                position: 'absolute',
+                                top: startY,
+                                left: startX,
+                                width: 0,
+                                transform: `rotate(${lineRotation}deg)`,
+                                transformOrigin: '0 0',
+                            }}
+                            onTransitionEnd={(e) => {
+                                const self = e.currentTarget;
+                                if (self) {
+                                    self.style.transition = '';
+                                }
+                            }}
+                        />;
 
-            setElements(spans);
+                        return line
+                    }
+                }).filter(i => !!i);
+
+                setElements(spans);
+            };
+
+            updateLines();
+
+            window.addEventListener('scroll', updateLines);
+            window.addEventListener('resize', updateLines);
+
+            return () => {
+                window.removeEventListener('scroll', updateLines);
+                window.removeEventListener('resize', updateLines);
+            };
         }, [leftAnchor, rightAnchors]);
 
         return (

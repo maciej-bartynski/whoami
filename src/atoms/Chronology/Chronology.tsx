@@ -1,105 +1,77 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useCallback, useEffect, useRef, useState } from "react";
 import './Chronology.css';
-
-type StepConfig = {
-    label: string,
-    bgColor: string,
-    color: string,
-}
+import { AxisStepConfig } from "../../CVSection/myTools";
 
 const Chronology: FC<{
     onChange: (param: {
-        step: number,
+        step: number | null,
         touched: boolean;
     }) => void;
-    stepConfig: StepConfig[],
-    step: number,
+    stepsConfig: AxisStepConfig[],
+    step: number | null,
+    highlightedSteps: number[],
 }> = ({
     onChange,
-    stepConfig,
-    step
+    stepsConfig,
+    step,
+    highlightedSteps
 }) => {
 
         const trackRef = useRef<HTMLDivElement | null>(null);
         const handleRef = useRef<HTMLDivElement | null>(null);
-        const [locked, setLocked] = useState(false);
+        const [currentStep, setCurrentStep] = useState<number | null>(step);
+        const [locked, _setLocked] = useState(false);
 
         useEffect(() => {
-            const observer = new MutationObserver(() => {
-                const handler = handleRef.current;
-                const track = trackRef.current;
-                if (!handler || !track) {
-                    return;
-                }
+            setCurrentStep(step)
+        }, [step])
 
-                const rangePx = track.offsetWidth;
-                let position = parseInt(handler.style.left) + (handler.offsetWidth / 2);
-                if (position < 0) position = 0;
-                if (position > rangePx) position = rangePx;
-                const pxPerStep = (rangePx) / (stepConfig.length - 1);
-                let currentStep = Math.floor(position / pxPerStep);
-                if (currentStep < 0) currentStep = 0;
-                if (currentStep > (stepConfig.length - 1)) currentStep = stepConfig.length - 1;
-                onChange({ step: currentStep, touched: true });
-            });
+        const setLocked = useCallback((locked: boolean) => {
+            initialStepRef.current = currentStep;
+            _setLocked(locked);
+            if (!locked) {
+                startMouseXRef.current = null;
+            }
+        }, [currentStep]);
 
-            const handler = handleRef.current;
+        const initialStepRef = useRef(currentStep);
+        const startMouseXRef = useRef<number | null>(null);
+
+        useEffect(() => {
+            if (currentStep === null) return;
+            const handle = handleRef.current;
             const track = trackRef.current;
-            if (!handler || !track) {
-                return;
-            }
-
-            observer.observe(handler, {
-                attributes: true,
-                attributeFilter: ["style"]
-            });
-
-            return () => {
-                observer.disconnect()
-            }
-        }, [onChange, stepConfig])
+            if (!handle || !track) return;
+            const distanceBetweenStepsPx = track.offsetWidth / (stepsConfig.length - 1);
+            const handleOffset = handle.offsetWidth / 2;
+            const handleX = (currentStep * distanceBetweenStepsPx) - handleOffset;
+            handle.style.left = `${handleX}px`;
+        });
 
         useEffect(() => {
-            let startPosition: number | null = null;
-            let initialShift: number = 0;
-
             const onMouseMove = (e: MouseEvent) => {
-                if (startPosition === null) {
-                    startPosition = e.clientX;
-                    if (handleRef.current) {
-                        initialShift = parseInt(handleRef?.current.style.left || "0") ?? 0;
-                    }
+                if (startMouseXRef.current === null) {
+                    startMouseXRef.current = e.clientX;
                 } else {
-                    const additionalShift = e.clientX - startPosition;
-                    const totalShift = initialShift + additionalShift;
-                    const handler = handleRef.current;
                     const track = trackRef.current;
-                    if (handler && track) {
-                        const handlerShift = (handler.offsetWidth / 2);
-                        const minShift = -handlerShift;
-                        const maxShift = (track.offsetWidth) - handlerShift;
-
-                        let finalShift = totalShift;
-
-                        if (totalShift >= maxShift) {
-                            finalShift = maxShift;
-                        }
-                        if (totalShift < minShift) {
-                            finalShift = minShift;
-                        }
-
-                        handler.style.left = `${finalShift}px`
-                    }
+                    if (!track || stepsConfig.length < 2) return;
+                    const distanceBetweenStepsPx = track.offsetWidth / (stepsConfig.length - 1);
+                    const currentStepToX = (initialStepRef.current || 0) * distanceBetweenStepsPx;
+                    const shiftMouseX = e.clientX - startMouseXRef.current;
+                    const newX = currentStepToX + shiftMouseX;
+                    let newXToStep = Math.round(newX / distanceBetweenStepsPx);
+                    if (newXToStep < 0) newXToStep = 0;
+                    if (newXToStep >= stepsConfig.length) newXToStep = stepsConfig.length - 1;
+                    setCurrentStep(newXToStep);
                 }
             }
             if (locked) {
                 window.addEventListener('mousemove', onMouseMove)
             }
-
             return () => {
                 window.removeEventListener('mousemove', onMouseMove)
             }
-        }, [locked]);
+        }, [locked, currentStep, stepsConfig]);
 
         useEffect(() => {
             const unlock = () => setLocked(false);
@@ -109,26 +81,60 @@ const Chronology: FC<{
                 window.removeEventListener('mouseup', unlock);
                 window.removeEventListener('click', unlock);
             }
-        }, []);
+        }, [setLocked]);
+
+        useEffect(() => {
+            if (step !== currentStep) {
+                onChange({
+                    step: currentStep,
+                    touched: true,
+                })
+            }
+        }, [step, currentStep, onChange])
 
         return (
-            <div className="Chronology_section">
+            <div className={`Chronology_section ${locked ? '--operational' : ''}`}>
+                <div className="Chronology_start-ornament"></div>
                 <div
                     className="Chronology_track"
                     ref={trackRef}
                 >
                     <div className="Chronology_axis" />
                     <ul className="Chronology_axis-list">
-                        {stepConfig.map((config, idx) => {
+                        {stepsConfig.map((config, idx) => {
+                            const isActive = step === idx;
+                            const isHighlighted = highlightedSteps.includes(idx);
+
                             return (
                                 <li
                                     key={idx}
-                                    className={`Chronology_axis-unit ${step === idx ? '--active' : ''}`}
-                                    data-attr={config.label}
+                                    className={`Chronology_axis-unit 
+                                        ${isActive ? '--active' : ''} 
+                                        ${isHighlighted ? '--highlighted' : ''}
+                                    `}
                                     style={{
-                                        backgroundColor: 'var(--pastel)',
+                                        backgroundColor: config.bgColor,
+                                        color: config.color
                                     }}
-                                />
+                                >
+                                    <span
+                                        className={`Chronology_axis-unit-label ${isHighlighted ? '--highlighted' : ''} ${isActive && !highlightedSteps.length ? '--active' : ''}`}
+                                        style={{
+                                            color: config.bgColor,
+                                        }}
+                                    >
+                                        {config.label}
+                                    </span>
+                                    <span
+                                        className={`Chronology_axis-unit-highlight ${isHighlighted ? '--highlighted' : ''} ${isActive && !highlightedSteps.length ? '--active' : ''}`}
+                                        role="presentation"
+                                        style={{
+                                            background: `radial-gradient(ellipse 100% 100% at left bottom,
+                                                ${config.bgColor},
+                                                rgba(var(--pastel-rgb), 0))`
+                                        }}
+                                    />
+                                </li>
                             )
                         })}
                     </ul>
@@ -143,6 +149,7 @@ const Chronology: FC<{
                         &lsaquo;&rsaquo;
                     </div>
                 </div>
+                <div className="Chronology_end-ornament"></div>
             </div>
         )
     }

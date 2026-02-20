@@ -10,7 +10,7 @@
     width: 100%;
     max-width: var(--max-width);
     background-color: var(--paper);
-    padding: calc(var(--padding) * 3) var(--padding) var(--padding) calc(var(--padding) * 6);
+    padding: calc(var(--padding) * 3) calc(var(--padding) * 3) var(--padding) calc(var(--padding) * 6);
     margin-left: auto;
 }
 
@@ -39,33 +39,50 @@
     line-height: 1;
 }
 
-
 .CVSection_content {
     display: flex;
     width: 100%;
     max-width: var(--max-width);
     background-color: var(--paper);
-    padding: calc(var(--padding) * 3) var(--padding) var(--padding) calc(var(--padding) * 6);
+    padding: calc(var(--padding) * 3) calc(var(--padding) * 3) var(--padding) calc(var(--padding) * 6);
     margin-left: auto;
+    gap: 30px;
+    position: relative;
+}
+
+.CVSection_allCasesColumn {
+    flex: 3;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .CVSection_cases {
-    flex: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
+    margin-bottom: 100px;
+    position: relative;
 }
 
 .CVSection_tools {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 26px;
+    max-width: 300px;
+    position: sticky;
+    top: 12px;
+    height: fit-content;
 }
 
 .CVSection_toolsTitle {
     text-align: start;
+    color: rgba(var(--wall-rgb), .75);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 14px;
+    font-size: 14px;
 }
 
 .CVSection_casesTitle {
@@ -73,26 +90,57 @@
     display: inline-block;
     margin: 0;
     padding: 0;
-    margin-left: 25%;
+    padding-left: 25%;
     color: var(--pastel);
-    width: 75%;
+    width: 100%;
+    background-color: var(--paper);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    border-bottom: solid 1px rgba(var(--floor-rgb), .1);
 }
 
 .CVSection_toolBlock {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
+    position: sticky;
+    top: 44px;
+    left: 0
 }
 
 .CVSection_aside {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: sticky;
+    bottom: -80px;
     height: 80px;
-    background-color: var(--paper);
+    background-color: rgba(var(--paper-rgb), 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+    transition: bottom 250ms ease-out;
+    width: calc(100%);
+    margin: 0 auto;
+    max-width: 1000px;
+
+    background: linear-gradient(to top,
+            rgba(var(--paper-rgb), 0.9) 0%,
+            rgba(var(--paper-rgb), 0.9) 80%,
+            rgba(var(--paper-rgb), 0.1)) 100%
+}
+
+.CVSection_asideShow {
+    bottom: 0;
+    transition-delay: 0ms;
+}
+
+.CVSection_asideHide {
+    bottom: -80px;
+    transition-delay: 2000ms;
+}
+
+.CVSection_aside:hover {
+    bottom: 0;
 }

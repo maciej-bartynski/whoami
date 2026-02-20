@@ -1,5 +1,6 @@
 
 export enum ToolSections {
+    /** Tech */
     React = 'React',
     Coding = 'Coding',
     Backend = 'Backend',
@@ -7,9 +8,14 @@ export enum ToolSections {
     Mobile = 'Mobile',
     Stacks = 'Stacks',
     Platforms = 'Platforms',
+
+    /** Soft */
+    EnglishB2 = 'English B2',
+    Skills = 'Developed'
 }
 
 export enum ToolsList {
+    /** Tech */
     React = 'React',
     Redux = 'Redux',
     ReactRouter = 'React router',
@@ -41,6 +47,35 @@ export enum ToolsList {
     AppStore = 'App Store',
     Snyk = 'Snyk',
     Sentry = 'Sentry',
+
+    /** Skills */
+    EnglishB2 = 'English B2',
+    EnglishPractical = 'Team language: ENG',
+    CommunicationSkill = 'Communication',
+    WritingSkill = 'Easy pen',
+    DesignTools = 'UX/UI tools',
+    UxWorking = 'UX working exp',
+    UiWorking = 'Graphics working exp',
+    Ownership = 'Ownership',
+    Leading = 'Leading',
+    Care = 'Care'
+}
+
+export const MapToolSectionToLang: Partial<Record<ToolSections, { PL: string, ENG: string }>> = {
+    [ToolSections.EnglishB2]: { PL: 'Angielski B2', ENG: ToolSections.EnglishB2 },
+    [ToolSections.Skills]: { PL: 'Wypracowane', ENG: ToolSections.Skills },
+}
+
+export const MapToolToLang: Partial<Record<ToolsList, { PL: string, ENG: string }>> = {
+    [ToolsList.EnglishB2]: { PL: 'Angielski B2', ENG: ToolsList.EnglishB2 },
+    [ToolsList.EnglishPractical]: { PL: 'Język zespołu: ENG', ENG: ToolsList.EnglishPractical },
+    [ToolsList.CommunicationSkill]: { PL: 'Komunikacja', ENG: ToolsList.CommunicationSkill },
+    [ToolsList.WritingSkill]: { PL: 'Lekkie pióro', ENG: ToolsList.WritingSkill },
+    [ToolsList.DesignTools]: { PL: 'Narzędzia UX/UI', ENG: ToolsList.DesignTools },
+    [ToolsList.UxWorking]: { PL: 'Praca z UX', ENG: ToolsList.UxWorking },
+    [ToolsList.UiWorking]: { PL: 'Praca graficzna', ENG: ToolsList.UiWorking },
+    [ToolsList.Ownership]: { PL: 'Odpowiedzialność', ENG: ToolsList.Ownership },
+    [ToolsList.Care]: { PL: 'Troska', ENG: ToolsList.Care },
 }
 
 export const MyTools = {
@@ -52,6 +87,23 @@ export const MyTools = {
     [ToolSections.Stacks]: [ToolsList.MERN, ToolsList.WebComponents, ToolsList.JERN],
     [ToolSections.Platforms]: [ToolsList.Jira, ToolsList.Github, ToolsList.Bitbucket, ToolsList.Auth0, ToolsList.GooglePlay, ToolsList.AppStore, ToolsList.Snyk, ToolsList.Sentry],
 } as const;
+
+export const MySkills = {
+    [ToolSections.EnglishB2]: [
+        ToolsList.EnglishB2,
+        ToolsList.EnglishPractical,
+        ToolsList.DesignTools,
+    ],
+    [ToolSections.Skills]: [
+        ToolsList.CommunicationSkill,
+        ToolsList.WritingSkill,
+        ToolsList.UxWorking,
+        ToolsList.UiWorking,
+        ToolsList.Ownership,
+        ToolsList.Leading,
+        ToolsList.Care,
+    ]
+}
 
 export const MyWork = [
     {
@@ -71,6 +123,15 @@ export const MyWork = [
             ToolsList.Jira,
             ToolsList.Sentry,
             ToolsList.Snyk,
+            ToolsList.EnglishPractical,
+            ToolsList.CommunicationSkill,
+            ToolsList.WritingSkill,
+            ToolsList.UxWorking,
+            ToolsList.UiWorking,
+            ToolsList.Ownership,
+            ToolsList.Leading,
+            ToolsList.Care,
+
         ]
     },
     {
@@ -88,7 +149,11 @@ export const MyWork = [
             ToolsList.AppStore,
             ToolsList.Auth0,
             ToolsList.Bitbucket,
-            ToolsList.Sentry
+            ToolsList.Sentry,
+            ToolsList.EnglishPractical,
+            ToolsList.Ownership,
+            ToolsList.Leading,
+            ToolsList.Care,
         ]
     },
     {
@@ -121,6 +186,8 @@ export const MyWork = [
             ToolsList.CSS3,
             ToolsList.JavaScriptES6Plus,
             ToolsList.ReactRouter,
+            ToolsList.Ownership,
+            ToolsList.Care,
         ]
     },
 ] as const;
@@ -147,6 +214,11 @@ export const MyWorkSecondary = [
             ToolsList.OVH,
             ToolsList.GHActions,
             ToolsList.Github,
+            ToolsList.CommunicationSkill,
+            ToolsList.UxWorking,
+            ToolsList.UiWorking,
+            ToolsList.Ownership,
+            ToolsList.Care,
         ]
     },
     {
@@ -162,7 +234,10 @@ export const MyWorkSecondary = [
             ToolsList.ReactExpo,
             ToolsList.Docker,
             ToolsList.JavaScriptES6Plus,
-            ToolsList.React
+            ToolsList.React,
+            ToolsList.CommunicationSkill,
+            ToolsList.Leading,
+            ToolsList.Care,
         ]
     },
     {
@@ -191,8 +266,12 @@ export const MyWorkSecondary = [
             ToolsList.HTML5,
             ToolsList.JavaScriptES6Plus,
             ToolsList.CSS3,
+            ToolsList.Care,
         ]
     },
+] as const;
+
+export const MyWorkTertiary = [
     {
         title: 'Indie dev with cutting-edge frontend stack',
         subtitle: 'for open usage',
@@ -207,12 +286,14 @@ export const MyWorkSecondary = [
             ToolsList.CSS3,
             ToolsList.Github,
             ToolsList.TypeScript,
-            ToolsList.WebComponents
+            ToolsList.WebComponents,
+            ToolsList.DesignTools,
+            ToolsList.UxWorking,
+            ToolsList.UiWorking,
+            ToolsList.Ownership,
+            ToolsList.Leading,
         ]
     },
-];
-
-export const MyWorkTertiary = [
     {
         title: 'Mobile dev with Flutter',
         subtitle: 'for bakeMAnia',
@@ -226,6 +307,10 @@ export const MyWorkTertiary = [
             ToolsList.Dart,
             ToolsList.GooglePlay,
             ToolsList.AppStore,
+            ToolsList.CommunicationSkill,
+            ToolsList.UxWorking,
+            ToolsList.UiWorking,
+            ToolsList.Ownership,
         ]
     },
     {
@@ -246,6 +331,8 @@ export const MyWorkTertiary = [
             ToolsList.Redux,
             ToolsList.NodeJs,
             ToolsList.Mongodb,
+            ToolsList.UxWorking,
+            ToolsList.Ownership,
         ]
     },
     {
@@ -266,9 +353,10 @@ export const MyWorkTertiary = [
             ToolsList.AWS,
             ToolsList.MERN,
             ToolsList.Mongodb,
+            ToolsList.UxWorking,
         ]
     },
-];
+] as const;
 
 export const MyEdu = [
     {
@@ -279,7 +367,11 @@ export const MyEdu = [
             time: '2016-06-01',
             label: '2016'
         },
-        stack: []
+        stack: [
+            ToolsList.EnglishB2,
+            ToolsList.CommunicationSkill,
+            ToolsList.DesignTools,
+        ]
     },
     {
         title: "Bachelors's degree",
@@ -289,8 +381,109 @@ export const MyEdu = [
             time: '2014-06-01',
             label: '2014'
         },
-        stack: []
+        stack: [
+            ToolsList.EnglishB2,
+            ToolsList.CommunicationSkill,
+            ToolsList.WritingSkill,
+        ]
     },
-]
+] as const;
 
 export type MyWorkItem = typeof MyWork[number]
+    | typeof MyEdu[number]
+    | typeof MyWorkSecondary[number]
+    | typeof MyWorkTertiary[number];
+
+export const caseItemToSelector = (item: MyWorkItem): string => {
+    const token = JSON.stringify(item);
+    const alphanumercToken = token.replace(/[^a-zA-Z0-9]/g, 'x');
+    const selector = `x${alphanumercToken}`;
+    return selector
+}
+
+export type DynamicSectionId = 'work-primary' | 'work-secondary' | 'work-tertiary' | 'edu';
+export type MyTymeline = typeof MyWork | typeof MyEdu | typeof MyWorkSecondary | typeof MyWorkTertiary;
+
+const CaseSectionColors: Record<DynamicSectionId, string> = {
+    'work-primary': 'var(--pastel)',
+    'edu': 'var(--wall)',
+    'work-secondary': 'var(--ground)',
+    'work-tertiary': 'rgba(var(--floor-rgb),.4)',
+
+}
+export const DisplayDynamicSections: {
+    id: DynamicSectionId,
+    data: MyTymeline,
+    accent: string,
+}[] = [
+        {
+            id: 'work-primary',
+            data: MyWork,
+            accent: CaseSectionColors['work-primary'],
+        },
+        {
+            id: 'edu',
+            data: MyEdu,
+            accent: CaseSectionColors['edu'],
+        },
+        {
+            id: 'work-secondary',
+            data: MyWorkSecondary,
+            accent: CaseSectionColors['work-secondary'],
+        },
+        {
+            id: 'work-tertiary',
+            data: MyWorkTertiary,
+            accent: CaseSectionColors['work-tertiary'],
+        }
+    ];
+
+export type AxisStepConfig = {
+    color: string,
+    bgColor: string,
+    label: string,
+    sortKey: string,
+    token: string,
+}
+export const AxisSteps: AxisStepConfig[] = [
+    ...MyWork.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: CaseSectionColors['work-primary'],
+            label: item.title,
+            sortKey: item.date.time,
+            token: JSON.stringify(item),
+        }
+    }),
+    ...MyWorkSecondary.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: CaseSectionColors['work-secondary'],
+            label: item.title,
+            sortKey: item.date.time,
+            token: JSON.stringify(item),
+        }
+    }),
+    ...MyWorkTertiary.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: CaseSectionColors['work-tertiary'],
+            label: item.title,
+            sortKey: item.date.time,
+            token: JSON.stringify(item),
+        }
+    }),
+    ...MyEdu.map(item => {
+        return {
+            color: 'var(--paper)',
+            bgColor: CaseSectionColors['edu'],
+            label: item.title,
+            sortKey: item.date.time,
+            token: JSON.stringify(item),
+        }
+    }),
+].sort((a, b) => {
+    const dateA = new Date(a.sortKey).getTime();
+    const dateB = new Date(b.sortKey).getTime();
+    return dateA - dateB;
+});

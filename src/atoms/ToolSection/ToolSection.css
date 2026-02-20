@@ -1,41 +1,46 @@
 .ToolSection {
     color: rgba(var(--wall-rgb), .75);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 4px;
 }
 
 .ToolSection_title {
+    text-align: end;
     margin: 0;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 900;
-    letter-spacing: 1px;
     display: inline-block;
-    padding: 2px 6px;
-    margin: 2px;
     background-color: transparent;
     transition: background-color 250ms ease-in, color 250ms ease-in;
-    transition-delay: 500ms;
+    transition-delay: 1000ms;
 }
 
 .ToolSection_list {
-    display: inline;
+    display: flex;
+    align-items: center;
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
+    width: 75%;
+    gap: 4px;
 }
 
 .ToolSection_item {
     list-style: none;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 500;
-    margin: 2px;
-    padding: 2px 6px;
+    padding: 0px 6px;
     display: inline-block;
     background-color: transparent;
     transition: background-color 250ms ease-in, color 250ms ease-in;
-    transition-delay: 500ms;
+    transition-delay: 1000ms;
 }
 
 .ToolSection_item[data-active="true"],
 .ToolSection_title[data-active="true"] {
     background-color: rgb(var(--pastel-rgb), .5);
-    color: var(--floor);
+    background-color: var(--section-accent, rgb(var(--pastel-rgb), .5));
+    color: var(--paper);
 }

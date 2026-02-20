@@ -7,7 +7,9 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
-    --accent: var(--pastel);
+    --accent: var(--section-accent, var(--pastel));
+    max-width: 500px;
+    scroll-margin-bottom: 100px
 }
 
 .ExperienceCase_heading {
@@ -43,14 +45,16 @@
     opacity: 0;
 }
 
+.ExperienceCase.--active::after,
 .ExperienceCase:hover::after {
     opacity: 1;
     left: calc(25% - 3px);
 }
 
+.ExperienceCase.--active::before,
 .ExperienceCase:hover::before {
     opacity: 1;
-    width: 40%;
+    width: 85%;
 }
 
 .ExperienceCase_heading span:first-child {
@@ -72,8 +76,10 @@
     transition: background-color 250ms ease-out, padding 250ms ease-out;
     background-color: transparent;
     color: var(--wall);
+    max-width: 25%;
 }
 
+.ExperienceCase.--active .ExperienceCase_time,
 .ExperienceCase:hover .ExperienceCase_time {
     background-color: var(--accent);
     color: var(--paper);

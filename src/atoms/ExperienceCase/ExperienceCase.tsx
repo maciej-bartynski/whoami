@@ -10,21 +10,34 @@ const ExperienceCase: FC<{
     subtitle: string,
     description: string,
     timeDisplay: string,
-    timeDate: string
+    timeDate: string,
+    caseSectionId?: string,
+    caseId?: string;
+    isActive?: boolean;
 }> = ({
     topH = 3,
     title,
     description,
     timeDate,
     timeDisplay,
-    subtitle
+    subtitle,
+    caseSectionId,
+    caseId,
+    isActive
 }) => {
         return (
-            <article className={ClassNames.ExperienceCase}>
+            <article
+                data-section-id={caseSectionId}
+                className={`${ClassNames.ExperienceCase} ${isActive ? '--active' : ''}`}
+                id={caseId}
+            >
                 <Heading h={topH} className={ClassNames.ExperienceCase_heading}>
                     <span>{title}</span>{" "}<span>{subtitle}</span>
                 </Heading>
-                <time dateTime={timeDate} className={ClassNames.ExperienceCase_time}>
+                <time
+                    dateTime={timeDate}
+                    className={ClassNames.ExperienceCase_time}
+                >
                     {timeDisplay}
                 </time>
                 <p className={ClassNames.ExperienceCase_description}>

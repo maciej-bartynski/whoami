@@ -13,6 +13,7 @@
   --pastel: #7396bf;
   --wall: #807b90;
   --jeans: #332c33;
+  --ground: #af7a70;
   --anchor: #646cff;
   --floor: #213547;
   --anchor-hover: #535bf2;
@@ -20,9 +21,11 @@
   --paper-rgb: 218, 218, 210;
   --pastel-rgb: 115, 150, 191;
   --wall-rgb: 128, 123, 144;
+  --ground-rgb: 175, 122, 112;
   --jeans-rgb: 51, 44, 51;
   --anchor-rgb: 100, 108, 255;
   --floor-rgb: 33, 53, 71;
+
 }
 
 * {
